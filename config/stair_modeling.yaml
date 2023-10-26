@@ -16,7 +16,7 @@
 
     topic_names:
       input_point_cloud_topic: "/zedm/zed_node/point_cloud/cloud_registered"
-      filtered_point_cloud_topic: "/stair_modeling_ros/point_cloud/cloud_filtered"
+      filtered_point_cloud_topic: "/stair_modeling/point_cloud/cloud_filtered"
 
     frame_ids:
       input_cloud_frame: "zedm_left_camera_frame"
@@ -43,7 +43,7 @@
       y_threshold: 0.05
 
     topic_names:
-      filtered_point_cloud_topic: "/stair_modeling_ros/point_cloud/cloud_filtered"
+      filtered_point_cloud_topic: "/stair_modeling/point_cloud/cloud_filtered"
 
     frame_ids:
       output_cloud_frame: "zedm_base_link_projected"
