@@ -3,8 +3,8 @@
   ros__parameters:
 
     voxel_filter:
-      leaf_size_xy: 0.04    # best = 0.02
-      leaf_size_z: 0.08     # best = 0.08
+      leaf_size_xy: 0.04    
+      leaf_size_z: 0.08     
 
     crop_box:
       min_x: 0.0
