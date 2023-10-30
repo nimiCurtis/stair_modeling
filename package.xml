@@ -2,22 +2,27 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>stair_modeling</name>
-  <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <version>0.1.0</version>
+  <description>Stair modeling package</description>
   <maintainer email="nimicu21@gmail.com">nimrod</maintainer>
-  <license>TODO: License declaration</license>
+  <license>Apache License 2.0</license>
+	<url type="repository">https://github.com/nimiCurtis/stair_modeling.git</url>
 
+<!-- Declare ROS2 package build tool -->
   <buildtool_depend>ament_cmake</buildtool_depend>
 
+<!-- Declares ROS2 package name that is required at build time -->
   <depend>rclcpp</depend>
   <depend>rcutils</depend>
   <depend>rclcpp_components</depend>
   <depend>zion_msgs</depend>
   <depend>zion_components</depend>
 
+<!-- Declare ROS2 package testing tools -->
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
 
+<!-- Declares ROS2 package name that is needed as part of some build interface it exports -->
   <export>
     <build_type>ament_cmake</build_type>
   </export>
