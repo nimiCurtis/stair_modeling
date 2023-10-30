@@ -1,16 +1,17 @@
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, TimerAction
+from launch.actions import DeclareLaunchArgument, SetEnvironmentVariable
 from launch_ros.actions import Node
 from launch.substitutions import LaunchConfiguration
 
 def generate_launch_description():
 
-    # Set LOG format
-    os.environ['RCUTILS_CONSOLE_OUTPUT_FORMAT'] = '{time} [{name}] [{severity}] {message}'
-    os.environ['RCUTILS_COLORIZED_OUTPUT'] = '0'
-
+    package_name = 'stair_modeling'
+    
+    # define ns as robot name.
+    robot = LaunchConfiguration('robot',default="zion")
+    
     # Get parameters from yaml
     config = os.path.join(
         get_package_share_directory('stair_modeling'),
@@ -27,8 +28,9 @@ def generate_launch_description():
 
     # Set launch of stair detector
     stair_modeling = Node(
-                                package='stair_modeling',
+                                package=package_name,
                                 executable='stair_modeling',
+                                namespace=robot,
                                 output='screen',
                                 parameters=[config,
                                             {'debug': LaunchConfiguration('debug')}],
@@ -36,6 +38,8 @@ def generate_launch_description():
 
     # Return launch description
     return LaunchDescription([
+        SetEnvironmentVariable(name='RCUTILS_COLORIZED_OUTPUT', value='1'),
+        SetEnvironmentVariable(name='RCUTILS_CONSOLE_OUTPUT_FORMAT', value='{time} [{name}] [{severity}] {message}'),
         debug_arg,
         stair_modeling
     ])

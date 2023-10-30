@@ -1,11 +1,11 @@
-// system
+// Standard library includes
 #include <sys/resource.h>
 #include <memory>
 
-// ros
+// ROS application/library includes
 #include <rclcpp/rclcpp.hpp>
 
-// custom
+// Custom includes
 #include "zion_components/stair_modeling_component.hpp"
 #include "zion_components/zion_broadcaster_component.hpp"
 #include "zion_components/cloud_processor_component.hpp"
@@ -18,20 +18,23 @@ int main(int argc, char * argv[])
   // Initialize any global resources needed by the middleware and the client library.
   rclcpp::init(argc, argv);
 
-  // // build nodes
-    rclcpp::NodeOptions options;
+  // Build nodes
+  rclcpp::NodeOptions options;
 
-    auto brodcaster = std::make_shared<zion::ZionBroadcaster>(options);
-    auto processor = std::make_shared<zion::CloudProcessor>(options);
-    auto stair_modeling = std::make_shared<zion::StairModeling>(options);
+  // Enable intraprocess communication
+  options.use_intra_process_comms(true); 
 
-  // // run executor
+  auto brodcaster = std::make_shared<zion::ZionBroadcaster>(options);
+  auto processor = std::make_shared<zion::CloudProcessor>(options);
+  auto stair_modeling = std::make_shared<zion::StairModeling>(options);
+
+  // Build executors
   auto executor1 = std::make_shared<rclcpp::executors::SingleThreadedExecutor>();
   executor1->add_node(brodcaster);
   auto executor1_thread = std::thread(
     [&](){
       int nice = -5;
-      setpriority(PRIO_PROCESS, gettid(),nice);
+      setpriority(PRIO_PROCESS, gettid(), nice);
       executor1->spin();
     }
   );
@@ -41,7 +44,7 @@ int main(int argc, char * argv[])
   auto executor2_thread = std::thread(
     [&](){
       int nice = -5;
-      setpriority(PRIO_PROCESS, gettid(),nice);
+      setpriority(PRIO_PROCESS, gettid(), nice);
       executor2->spin();
     }
   );
@@ -51,16 +54,17 @@ int main(int argc, char * argv[])
   auto executor3_thread = std::thread(
     [&](){
       int nice = -5;
-      setpriority(PRIO_PROCESS, gettid(),nice);
+      setpriority(PRIO_PROCESS, gettid(), nice);
       executor3->spin();
     }
   );
 
+  // Run executors
   executor1_thread.join();
   executor2_thread.join();
   executor3_thread.join();
 
-  // shutdown
+  // Shutdown
   rclcpp::shutdown();
   return 0;
 }
