@@ -24,45 +24,17 @@ int main(int argc, char * argv[])
   // Enable intraprocess communication
   options.use_intra_process_comms(true); 
 
+  // Set components nodes
   auto brodcaster = std::make_shared<zion::ZionBroadcaster>(options);
   auto processor = std::make_shared<zion::CloudProcessor>(options);
   auto stair_modeling = std::make_shared<zion::StairModeling>(options);
 
-  // Build executors
-  auto executor1 = std::make_shared<rclcpp::executors::SingleThreadedExecutor>();
-  executor1->add_node(brodcaster);
-  auto executor1_thread = std::thread(
-    [&](){
-      int nice = -5;
-      setpriority(PRIO_PROCESS, gettid(), nice);
-      executor1->spin();
-    }
-  );
-
-  auto executor2 = std::make_shared<rclcpp::executors::SingleThreadedExecutor>();
-  executor2->add_node(processor);
-  auto executor2_thread = std::thread(
-    [&](){
-      int nice = -5;
-      setpriority(PRIO_PROCESS, gettid(), nice);
-      executor2->spin();
-    }
-  );
-
-  auto executor3 = std::make_shared<rclcpp::executors::SingleThreadedExecutor>();
-  executor3->add_node(stair_modeling);
-  auto executor3_thread = std::thread(
-    [&](){
-      int nice = -5;
-      setpriority(PRIO_PROCESS, gettid(), nice);
-      executor3->spin();
-    }
-  );
-
-  // Run executors
-  executor1_thread.join();
-  executor2_thread.join();
-  executor3_thread.join();
+  // Set executor and spin
+  auto executor = std::make_shared<rclcpp::executors::MultiThreadedExecutor>();
+  executor->add_node(brodcaster);
+  executor->add_node(processor);
+  executor->add_node(stair_modeling);
+  executor->spin();
 
   // Shutdown
   rclcpp::shutdown();
