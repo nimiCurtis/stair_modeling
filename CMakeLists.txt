@@ -64,14 +64,11 @@ install(TARGETS stair_modeling
 # Install PARAMS files
 install(DIRECTORY
   config
+  launch
+  rviz2
   DESTINATION share/${PROJECT_NAME}
 )
 
-# Install LAUNCH files
-install(DIRECTORY
-  launch
-  DESTINATION share/${PROJECT_NAME}
-)
 
 ###############################################################################
 if(BUILD_TESTING)
