@@ -25,6 +25,14 @@ def generate_launch_description():
         default_value='false',
         description='Debug mode for stair modeling node'
     )
+    
+    # Declare the "use_det" argument for indicate
+    # if using detection node resluts for detecting stairs
+    use_det_arg = DeclareLaunchArgument(
+        'use_det',
+        default_value='false',
+        description='Using stair detection node with modeling'
+    )
 
     # Set launch of stair detector
     stair_modeling = Node(
@@ -33,7 +41,8 @@ def generate_launch_description():
                                 namespace=robot,
                                 output='screen',
                                 parameters=[config,
-                                            {'debug': LaunchConfiguration('debug')}],
+                                            {'debug': LaunchConfiguration('debug'),
+                                            'use_det': LaunchConfiguration('use_det')}],
                         )
 
     # Return launch description
@@ -41,5 +50,6 @@ def generate_launch_description():
         SetEnvironmentVariable(name='RCUTILS_COLORIZED_OUTPUT', value='1'),
         SetEnvironmentVariable(name='RCUTILS_CONSOLE_OUTPUT_FORMAT', value='{time} [{name}] [{severity}] {message}'),
         debug_arg,
+        use_det_arg,
         stair_modeling
     ])
