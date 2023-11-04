@@ -28,7 +28,6 @@ def generate_launch_description():
                 ]),
         )
 
-
         # launch stair detection node
         stair_detection_launch = IncludeLaunchDescription(
                 launch_description_source=PythonLaunchDescriptionSource([
