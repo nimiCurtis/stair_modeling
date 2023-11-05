@@ -59,15 +59,20 @@ def generate_launch_description():
                 }.items()
         )
 
-        # start the nodes after 5 secs
-        modeling_with_detection = TimerAction(
-                period=5.0,
-                actions=[stair_detection_launch,
-                        stair_modeling_launch]
+        # start the detection after 5 secs
+        stair_detection_timer_action = TimerAction(
+                period=6.0,
+                actions=[stair_detection_launch]
         )
         
+        # start the modeling after 8 secs
+        modeling_with_detection_timer_action = TimerAction(
+                period=20.0,
+                actions=[stair_modeling_launch]
+        )
         
         return LaunchDescription([
                 zion_zed_launch,
-                modeling_with_detection,
+                stair_detection_timer_action,
+                modeling_with_detection_timer_action
         ])
