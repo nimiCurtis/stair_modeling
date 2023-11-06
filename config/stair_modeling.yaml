@@ -11,9 +11,9 @@ zion:
 
       crop_box:
         min_x: 0.0
-        max_x: 2.0
-        min_y: -0.7
-        max_y: 0.7
+        max_x: 2.2
+        min_y: -0.4
+        max_y: 0.4
         min_z: -3.0
         max_z: 1.0
 
@@ -34,14 +34,14 @@ zion:
 
       clustering:
         cluster_tolerance: 0.08
-        min_cluster_size: 50
+        min_cluster_size: 100
         max_cluster_size: 25000
 
       floor_finding:
         k_neighbors: 50
 
       avg_x_calculation:
-        x_neighbors: 20
+        x_neighbors: 25
         y_threshold: 0.05
 
       topic_names:
