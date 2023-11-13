@@ -55,7 +55,7 @@ def generate_launch_description():
 
     # start the detection after 5 secs
     stair_detection_timer_action = TimerAction(
-            period=3.0,
+            period=1.0,
             actions=[stair_modeling]
     )
     # Return launch description
