@@ -1,8 +1,5 @@
-## TODO
-# zion:
-
 zion:
-  cloud_processor:
+  stair_modeling:
     ros__parameters:
 
       voxel_filter:
@@ -24,9 +21,6 @@ zion:
         input_cloud_frame: "zedm_left_camera_frame"
         output_cloud_frame: "zedm_base_link_projected"
 
-  stair_modeling:
-    ros__parameters:
-
       segmentation:
         distance_threshold: 0.05
         max_iterations: 500
@@ -44,19 +38,13 @@ zion:
         x_neighbors: 25
         y_threshold: 0.05
 
-      topic_names:
-        filtered_point_cloud_topic: "/zion/cloud_processor/cloud_filtered"
+  # zion_broadcaster:
+  #   ros__parameters:
 
-      frame_ids:
-        output_cloud_frame: "zedm_base_link_projected"
-
-  zion_broadcaster:
-    ros__parameters:
-
-      frame_ids:
-        map_frame: "map"
-        base_frame: "zedm_base_link"
-        output_cloud_frame: "zedm_base_link_projected"
+  #     frame_ids:
+  #       map_frame: "map"
+  #       base_frame: "zedm_base_link"
+  #       output_cloud_frame: "zedm_base_link_projected"
 
 /**:
     ros__parameters:

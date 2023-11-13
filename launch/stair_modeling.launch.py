@@ -1,7 +1,7 @@
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, SetEnvironmentVariable
+from launch.actions import DeclareLaunchArgument, SetEnvironmentVariable, TimerAction
 from launch_ros.actions import Node
 from launch.substitutions import LaunchConfiguration
 
@@ -25,7 +25,7 @@ def generate_launch_description():
         default_value='false',
         description='Debug mode for stair modeling node'
     )
-    
+
     # Declare the "use_det" argument for indicate
     # if using detection node resluts for detecting stairs
     use_det_arg = DeclareLaunchArgument(
@@ -34,6 +34,14 @@ def generate_launch_description():
         description='Using stair detection node with modeling'
     )
 
+    # Set launch of tf broadcaster
+    broadcaster = Node(
+                                package=package_name,
+                                executable='zion_broadcaster',
+                                namespace=robot,
+                                output='screen'
+                        )
+    
     # Set launch of stair detector
     stair_modeling = Node(
                                 package=package_name,
@@ -45,11 +53,17 @@ def generate_launch_description():
                                             'use_det': LaunchConfiguration('use_det')}],
                         )
 
+    # start the detection after 5 secs
+    stair_detection_timer_action = TimerAction(
+            period=3.0,
+            actions=[stair_modeling]
+    )
     # Return launch description
     return LaunchDescription([
         SetEnvironmentVariable(name='RCUTILS_COLORIZED_OUTPUT', value='1'),
         SetEnvironmentVariable(name='RCUTILS_CONSOLE_OUTPUT_FORMAT', value='{time} [{name}] [{severity}] {message}'),
         debug_arg,
         use_det_arg,
-        stair_modeling
+        broadcaster,
+        stair_detection_timer_action
     ])
