@@ -26,12 +26,11 @@ def generate_launch_description():
         description='Debug mode for stair modeling node'
     )
 
-    # Declare the "use_det" argument for indicate
-    # if using detection node resluts for detecting stairs
-    use_det_arg = DeclareLaunchArgument(
-        'use_det',
-        default_value='false',
-        description='Using stair detection node with modeling'
+    # Declare the "debug" argument
+    log_arg = DeclareLaunchArgument(
+        'log_level',
+        default_value=['debug'],
+        description='Logging level'
     )
 
     # Set launch of tf broadcaster
@@ -49,12 +48,12 @@ def generate_launch_description():
                                 namespace=robot,
                                 output='screen',
                                 parameters=[config,
-                                            {'debug': LaunchConfiguration('debug'),
-                                            'use_det': LaunchConfiguration('use_det')}],
+                                            {'debug': LaunchConfiguration('debug')}],
+                                # arguments=['--ros-args', '--log-level', log_arg]
                         )
 
     # start the detection after 5 secs
-    stair_detection_timer_action = TimerAction(
+    stair_modeling_timer_action = TimerAction(
             period=1.0,
             actions=[stair_modeling]
     )
@@ -63,7 +62,6 @@ def generate_launch_description():
         SetEnvironmentVariable(name='RCUTILS_COLORIZED_OUTPUT', value='1'),
         SetEnvironmentVariable(name='RCUTILS_CONSOLE_OUTPUT_FORMAT', value='{time} [{name}] [{severity}] {message}'),
         debug_arg,
-        use_det_arg,
         broadcaster,
-        stair_detection_timer_action
+        stair_modeling_timer_action
     ])
