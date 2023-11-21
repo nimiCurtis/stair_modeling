@@ -12,10 +12,7 @@ namespace zion
   { 
 
       RCLCPP_INFO(get_logger(), "********************************");
-      RCLCPP_INFO(get_logger(), "      Zion broadcaster node ");
-      RCLCPP_INFO(get_logger(), "********************************");
-      RCLCPP_INFO(get_logger(), " * namespace: %s", get_namespace());
-      RCLCPP_INFO(get_logger(), " * node name: %s", get_name());
+      RCLCPP_INFO(get_logger(), " %s/%s is running", get_namespace(), get_name());
       RCLCPP_INFO(get_logger(), "********************************");
 
       // Loading parameters
@@ -56,6 +53,9 @@ namespace zion
       this->declare_parameter("frame_ids.output_cloud_frame", "zedm_base_link_projected");      
       this->get_parameter("frame_ids.output_cloud_frame", output_frame_);
       RCLCPP_INFO(get_logger(),"* output_cloud_frame: '%s'", output_frame_.c_str());
+
+      RCLCPP_INFO(get_logger(),"*******************************************");
+
 
   }
 

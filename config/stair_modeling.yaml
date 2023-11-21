@@ -38,14 +38,6 @@ zion:
         x_neighbors: 25
         y_threshold: 0.05
 
-  # zion_broadcaster:
-  #   ros__parameters:
-
-  #     frame_ids:
-  #       map_frame: "map"
-  #       base_frame: "zedm_base_link"
-  #       output_cloud_frame: "zedm_base_link_projected"
-
 /**:
     ros__parameters:
       allNodeCanSee: True
