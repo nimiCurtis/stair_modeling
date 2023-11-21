@@ -4,13 +4,13 @@ zion:
 
       voxel_filter:
         leaf_size_xy: 0.04    
-        leaf_size_z: 0.08     
+        leaf_size_z: 0.09     
 
       crop_box:
         min_x: 0.0
-        max_x: 5.0
-        min_y: -0.4
-        max_y: 0.4
+        max_x: 2.0
+        min_y: -0.7
+        max_y: 0.7
         min_z: -3.0
         max_z: 1.0
 
@@ -22,21 +22,21 @@ zion:
         output_cloud_frame: "zedm_base_link_projected"
 
       segmentation:
-        distance_threshold: 0.05
+        distance_threshold: 0.06
         max_iterations: 500
-        angle_threshold: 5.
+        angle_threshold: 3.
 
       clustering:
-        cluster_tolerance: 0.08
-        min_cluster_size: 100
+        cluster_tolerance: 0.05
+        min_cluster_size: 150
         max_cluster_size: 25000
 
       floor_finding:
-        k_neighbors: 50
+        k_neighbors: 30
 
       avg_x_calculation:
-        x_neighbors: 25
-        y_threshold: 0.05
+        x_neighbors: 30
+        y_threshold: 0.055
 
 /**:
     ros__parameters:
