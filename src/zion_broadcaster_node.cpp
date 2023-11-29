@@ -27,7 +27,7 @@ namespace zion
       tf_sub_ = this->create_subscription<tf2_msgs::msg::TFMessage>( "/tf", qos_profile,
           std::bind(&ZionBroadcaster::tfCallback, this, std::placeholders::_1));
 
-      tf_buffer_   = std::make_unique<tf2_ros::Buffer>(this->get_clock());
+      tf_buffer_   = std::make_unique<tf2_ros::Buffer>(this->get_clock(),tf2::durationFromSec(5.0));
       tf_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
 
     }

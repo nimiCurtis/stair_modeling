@@ -16,6 +16,7 @@ zion:
 
       topic_names:
         input_point_cloud_topic: "/zedm/zed_node/point_cloud/cloud_registered"
+        # input_point_cloud_topic: "/zion/stair_modeling/cloud_filtered"
 
       frame_ids:
         input_cloud_frame: "zedm_left_camera_frame"

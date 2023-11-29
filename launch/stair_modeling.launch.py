@@ -63,7 +63,8 @@ def generate_launch_description():
                                 output='screen',
                                 parameters=[config,
                                             {'debug': LaunchConfiguration('debug')}],
-                                arguments=['--ros-args', '--log-level', LaunchConfiguration('log_level')]
+                                arguments=['--ros-args', '--log-level',
+                                        LaunchConfiguration('log_level')]
                         )
 
     # start the detection after 5 secs
@@ -71,12 +72,15 @@ def generate_launch_description():
             period=1.0,
             actions=[stair_modeling]
     )
+    
+    
     # Return launch description
     return LaunchDescription([
         SetEnvironmentVariable(name='RCUTILS_COLORIZED_OUTPUT', value='1'),
-        SetEnvironmentVariable(name='RCUTILS_CONSOLE_OUTPUT_FORMAT', value='{time} [{name}] [{severity}] {message}'),
+        SetEnvironmentVariable(name='RCUTILS_CONSOLE_OUTPUT_FORMAT',
+                            value='{time} [{name}] [{severity}] {message}'),
         log_arg,
         debug_arg,
         broadcaster,
-        stair_modeling_timer_action
+        stair_modeling_timer_action,
     ])
