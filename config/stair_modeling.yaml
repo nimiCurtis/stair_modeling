@@ -39,6 +39,11 @@ zion:
         x_neighbors: 30
         y_threshold: 0.055
 
+      stair_filter:
+        filter_min_limit: 3  
+        filter_max_limit: 15 #  maximum counts that stair can get,can put as param
+        pos_err_thresh: 0.05 
+
 /**:
     ros__parameters:
       allNodeCanSee: True

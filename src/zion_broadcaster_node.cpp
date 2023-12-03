@@ -88,7 +88,7 @@ namespace zion
         
             // Create a new transform to broadcast
             base_projected2map.header.stamp = this->get_clock()->now();
-            base_projected2map.header.frame_id = toFrameRel;
+            base_projected2map.header.frame_id = toFrameRel; // maybe change to the base_frame
 
             base_projected2map.child_frame_id = output_frame_;
 
