@@ -136,7 +136,7 @@ int main(int argc, char * argv[])
 
   auto executor_thread = std::thread(
     [&](){
-      int nice = -5;
+      int nice = -10;
       setpriority(PRIO_PROCESS, gettid(),nice);
       executor->spin();
     }

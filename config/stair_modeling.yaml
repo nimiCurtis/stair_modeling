@@ -16,15 +16,18 @@ zion:
 
       topic_names:
         input_point_cloud_topic: "/zedm/zed_node/point_cloud/cloud_registered"
-        # input_point_cloud_topic: "/zion/stair_modeling/cloud_filtered"
+        # input_point_cloud_topic: "/zedm/zed_node/mapping/fused_cloud"
 
+        # input_point_cloud_topic: "/zion/stair_modeling/cloud_filtered"
       frame_ids:
-        input_cloud_frame: "zedm_left_camera_frame"
-        output_cloud_frame: "zedm_base_link_projected"
+        map_frame: "map"
+        input_cloud_frame: "zedm_left_camera_frame"     # "zedm_left_camera_frame" when using the raw topic
+                                                        # "map" when using the fused topic
+        output_cloud_frame: "zedm_base_link_projected"  
 
       segmentation:
-        distance_threshold: 0.06
-        max_iterations: 500
+        distance_threshold: 0.04
+        max_iterations: 600
         angle_threshold: 3.
 
       clustering:
@@ -41,8 +44,10 @@ zion:
 
       stair_filter:
         filter_min_limit: 3  
-        filter_max_limit: 15 #  maximum counts that stair can get,can put as param
-        pos_err_thresh: 0.05 
+        filter_max_limit: 12  # maximum counts that stair can get,can put as param
+        pos_err_thresh: 0.055
+        w: 0.8                # weight factor for update the stair value 
+                              # stair = w * curr_stair + (1-w) * stair | 0.5 = avg
 
 /**:
     ros__parameters:
