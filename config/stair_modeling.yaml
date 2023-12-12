@@ -4,7 +4,7 @@ zion:
 
       voxel_filter:
         leaf_size_xy: 0.04    
-        leaf_size_z: 0.09     
+        leaf_size_z: 0.08     
 
       crop_box:
         min_x: 0.0
@@ -31,8 +31,8 @@ zion:
         angle_threshold: 3.
 
       clustering:
-        cluster_tolerance: 0.05
-        min_cluster_size: 150
+        cluster_tolerance: 0.035
+        min_cluster_size: 30
         max_cluster_size: 25000
 
       floor_finding:
@@ -42,10 +42,11 @@ zion:
         x_neighbors: 30
         y_threshold: 0.055
 
+
       stair_filter:
         filter_min_limit: 3  
-        filter_max_limit: 12  # maximum counts that stair can get,can put as param
-        pos_err_thresh: 0.055
+        filter_max_limit: 20  # maximum counts that stair can get,can put as param
+        pos_err_thresh: 0.06
         w: 0.8                # weight factor for update the stair value 
                               # stair = w * curr_stair + (1-w) * stair | 0.5 = avg
 
