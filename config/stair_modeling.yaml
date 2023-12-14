@@ -15,12 +15,12 @@ zion:
         max_z: 0.5
 
       topic_names:
-        # input_point_cloud_topic: "/zedm/zed_node/point_cloud/cloud_registered"
-        input_point_cloud_topic: "/zedm/zed_node/mapping/fused_cloud"
+        input_point_cloud_topic: "/zedm/zed_node/point_cloud/cloud_registered"
+        # input_point_cloud_topic: "/zedm/zed_node/mapping/fused_cloud"
 
       frame_ids:
         map_frame: "map"
-        input_cloud_frame: "map"     # "zedm_left_camera_frame" when using the raw topic
+        input_cloud_frame: "zedm_left_camera_frame"     # "zedm_left_camera_frame" when using the raw topic
                                                         # "map" when using the fused topic
         output_cloud_frame: "zedm_base_link_projected"  
 

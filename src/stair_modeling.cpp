@@ -43,7 +43,7 @@ int main(int argc, char * argv[])
   // Set the desired number of threads for the executor
   rclcpp::ExecutorOptions exec_options;
   
-  const size_t num_threads = 8; // Change this number to your desired value
+  const size_t num_threads = 4; // Change this number to your desired value
   auto executor = std::make_shared<rclcpp::executors::MultiThreadedExecutor>(exec_options,num_threads);
   executor->add_node(stair_modeling);
   executor->spin();
