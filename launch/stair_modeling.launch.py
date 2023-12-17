@@ -78,7 +78,7 @@ def generate_launch_description():
     return LaunchDescription([
         SetEnvironmentVariable(name='RCUTILS_COLORIZED_OUTPUT', value='1'),
         SetEnvironmentVariable(name='RCUTILS_CONSOLE_OUTPUT_FORMAT',
-                            value='{time} [{name}] [{severity}] {message}'),
+                            value='[{time}] [{name}] [{severity}] {message}'),
         log_arg,
         debug_arg,
         broadcaster,
